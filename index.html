@@ -3,9 +3,12 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1a1a2e">
-  <title>Tasks</title>
-  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVGFza3MiLCJzaG9ydF9uYW1lIjoiVGFza3MiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiMxYTFhMmUiLCJ0aGVtZV9jb2xvciI6IiMxYTFhMmUiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLCUzY3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzZSUzY3JlY3QgZmlsbD0nJTIzMWExYTJlJyB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicvJTNlJTNjcGF0aCBmaWxsPSclMjNmZmYnIGQ9J00xMjggMTkyaDI1NnY0OEgxMjh6bTAgODhoMjU2djQ4SDEyOHptMCA4OGgyNTZ2NDhIMTI4eicvJTNlJTNjL3N2ZyUzZSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+  <meta name="theme-color" content="#f5f1eb">
+  <title>Today</title>
+  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVG9kYXkiLCJzaG9ydF9uYW1lIjoiVG9kYXkiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmNWYxZWIiLCJ0aGVtZV9jb2xvciI6IiNmNWYxZWIiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLCUzY3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzZSUzY3JlY3QgZmlsbD0nJTIzZjVmMWViJyB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgcng9JzY0Jy8lM2UlM2NwYXRoIGZpbGw9JyUyM2MxNzY1YScgZD0nTTE0MCAxOTJoMjMydjMySDEyMHptMCA3MmgyMzJ2MzJIMTQwem0wIDcyaDE2MHYzMkgxNDB6Jy8lM2UlM2MvL3N2ZyUzZSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
   <style>
     * {
       margin: 0;
@@ -14,156 +17,216 @@
     }
 
     :root {
-      --bg: #0f0f1e;
-      --surface: #1a1a2e;
-      --surface-light: #252538;
-      --primary: #6366f1;
-      --primary-dark: #4f46e5;
-      --text: #e2e2e2;
-      --text-dim: #a0a0a0;
-      --danger: #ef4444;
-      --success: #10b981;
-      --border: #2d2d44;
+      --paper: #fffef9;
+      --bg: #f5f1eb;
+      --text: #3d3a34;
+      --text-soft: #8a857a;
+      --text-faded: #b8b3a8;
+      --line: #e8e4dc;
+      --accent: #c1765a;
+      --accent-soft: #d4a088;
+      --success: #7a9e7e;
+      --success-soft: #a8c4ab;
+      --danger: #c96b6b;
+      --shadow: rgba(61, 58, 52, 0.08);
+    }
+
+    html {
+      background: var(--bg);
     }
 
     body {
-      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+      font-family: 'Source Serif 4', Georgia, serif;
       background: var(--bg);
       color: var(--text);
       min-height: 100vh;
-      padding: 0;
-      margin: 0;
+      min-height: 100dvh;
+      line-height: 1.6;
     }
 
     .app {
       min-height: 100vh;
-      background: var(--surface);
+      min-height: 100dvh;
       display: flex;
       flex-direction: column;
+      max-width: 540px;
+      margin: 0 auto;
     }
 
+    /* Header - like the top of a notepad */
     .header {
-      padding: 1.5rem 1rem 1rem;
-      background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 100%);
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+      padding: 2.5rem 1.5rem 1.5rem;
+      text-align: center;
     }
 
     .header h1 {
-      font-size: 1.5rem;
-      font-weight: 700;
+      font-family: 'Caveat', cursive;
+      font-size: 2.5rem;
+      font-weight: 500;
+      color: var(--accent);
+      letter-spacing: 0.02em;
       margin-bottom: 0.25rem;
-      letter-spacing: -0.02em;
     }
 
     .header p {
-      color: rgba(255, 255, 255, 0.8);
-      font-size: 0.85rem;
+      font-size: 0.9rem;
+      color: var(--text-soft);
+      font-style: italic;
     }
 
-    .add-task {
-      padding: 1rem;
-      background: var(--surface);
-      border-bottom: 1px solid var(--border);
-      position: sticky;
+    /* The notepad paper area */
+    .paper {
+      flex: 1;
+      background: var(--paper);
+      margin: 0 0.75rem;
+      border-radius: 4px 4px 0 0;
+      box-shadow:
+        0 -1px 3px var(--shadow),
+        0 2px 8px var(--shadow),
+        inset 0 1px 0 rgba(255,255,255,0.8);
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Subtle ruled lines effect */
+    .paper::before {
+      content: '';
+      position: absolute;
       top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background-image: repeating-linear-gradient(
+        transparent,
+        transparent 31px,
+        var(--line) 31px,
+        var(--line) 32px
+      );
+      pointer-events: none;
+      opacity: 0.5;
+    }
+
+    /* Red margin line like real paper */
+    .paper::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 2.5rem;
+      width: 1px;
+      background: #efd5d0;
+      pointer-events: none;
+    }
+
+    /* Add task area */
+    .add-task {
+      padding: 1rem 1rem 1rem 3rem;
+      border-bottom: 1px solid var(--line);
+      position: relative;
       z-index: 10;
+      background: var(--paper);
     }
 
     .input-group {
       display: flex;
-      flex-direction: column;
       gap: 0.75rem;
+      align-items: center;
     }
 
     input[type="text"] {
-      width: 100%;
-      padding: 0.875rem 1rem;
-      background: var(--surface-light);
-      border: 2px solid var(--border);
-      border-radius: 8px;
+      flex: 1;
+      padding: 0.75rem 0;
+      background: transparent;
+      border: none;
+      border-bottom: 2px dashed var(--line);
       color: var(--text);
-      font-size: 0.95rem;
-      transition: all 0.2s;
+      font-family: inherit;
+      font-size: 1rem;
+      transition: border-color 0.2s;
     }
 
     input[type="text"]:focus {
       outline: none;
-      border-color: var(--primary);
-      background: var(--bg);
+      border-bottom-color: var(--accent-soft);
+      border-bottom-style: solid;
     }
 
     input[type="text"]::placeholder {
-      color: var(--text-dim);
+      color: var(--text-faded);
+      font-style: italic;
     }
 
-    button {
-      width: 100%;
-      padding: 0.875rem 1.5rem;
-      background: var(--primary);
+    .btn-add {
+      width: 36px;
+      height: 36px;
+      padding: 0;
+      background: var(--accent);
       color: white;
       border: none;
-      border-radius: 8px;
-      font-weight: 600;
-      font-size: 0.9rem;
+      border-radius: 50%;
+      font-size: 1.5rem;
+      line-height: 1;
       cursor: pointer;
       transition: all 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+      box-shadow: 0 2px 4px var(--shadow);
     }
 
-    button:active {
-      transform: scale(0.98);
+    .btn-add:hover {
+      background: #b36a4f;
+      transform: scale(1.05);
     }
 
+    .btn-add:active {
+      transform: scale(0.95);
+    }
+
+    /* Task list */
     .tasks {
       flex: 1;
-      padding: 1rem;
       overflow-y: auto;
+      padding: 0.5rem 0;
+      position: relative;
+      z-index: 5;
     }
 
     .task {
-      background: var(--surface-light);
-      border: 1px solid var(--border);
-      border-radius: 10px;
-      padding: 1rem;
-      margin-bottom: 0.75rem;
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-      transition: all 0.3s;
-      animation: slideIn 0.3s ease;
-    }
-
-    @keyframes slideIn {
-      from {
-        opacity: 0;
-        transform: translateY(-10px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
-    }
-
-    .task.completed .task-text {
-      text-decoration: line-through;
-      color: var(--text-dim);
-    }
-
-    .task-header {
+      padding: 0.875rem 1rem 0.875rem 3rem;
       display: flex;
       align-items: flex-start;
       gap: 0.75rem;
+      position: relative;
+      transition: background 0.15s;
     }
 
+    .task:hover {
+      background: rgba(245, 241, 235, 0.5);
+    }
+
+    .task.completed {
+      opacity: 0.6;
+    }
+
+    /* Custom checkbox - a gentle circle */
     .checkbox {
-      width: 22px;
-      height: 22px;
-      border: 2px solid var(--border);
-      border-radius: 6px;
+      width: 20px;
+      height: 20px;
+      border: 2px solid var(--text-faded);
+      border-radius: 50%;
       cursor: pointer;
       flex-shrink: 0;
       margin-top: 2px;
       transition: all 0.2s;
       position: relative;
+    }
+
+    .checkbox:hover {
+      border-color: var(--success);
     }
 
     .task.completed .checkbox {
@@ -172,14 +235,15 @@
     }
 
     .task.completed .checkbox::after {
-      content: '✓';
+      content: '';
       position: absolute;
-      top: 50%;
-      left: 50%;
-      transform: translate(-50%, -50%);
-      color: white;
-      font-size: 14px;
-      font-weight: bold;
+      top: 4px;
+      left: 6px;
+      width: 5px;
+      height: 9px;
+      border: solid white;
+      border-width: 0 2px 2px 0;
+      transform: rotate(45deg);
     }
 
     .task-content {
@@ -188,184 +252,95 @@
     }
 
     .task-text {
-      font-size: 0.95rem;
-      line-height: 1.5;
+      font-size: 1rem;
       word-wrap: break-word;
       cursor: pointer;
+      padding: 2px 0;
+      border-radius: 2px;
+      transition: all 0.2s;
     }
 
+    .task-text:hover {
+      color: var(--accent);
+    }
+
+    /* Completed task - gentle handwritten strikethrough */
+    .task.completed .task-text {
+      color: var(--text-soft);
+      text-decoration: line-through;
+      text-decoration-color: var(--success-soft);
+      text-decoration-thickness: 2px;
+      font-style: italic;
+    }
+
+    /* Task actions - only visible on hover */
     .task-actions {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.25rem;
+      opacity: 0;
+      transition: opacity 0.15s;
     }
 
-    .btn-small {
-      flex: 1;
-      padding: 0.625rem 1rem;
-      font-size: 0.8rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text);
+    .task:hover .task-actions {
+      opacity: 1;
     }
 
-    .btn-delete {
-      background: var(--danger);
-      border-color: var(--danger);
-      color: white;
+    .btn-action {
+      padding: 0.35rem 0.6rem;
+      font-size: 0.75rem;
+      background: transparent;
+      border: 1px solid var(--line);
+      border-radius: 4px;
+      color: var(--text-soft);
+      cursor: pointer;
+      font-family: inherit;
+      transition: all 0.15s;
     }
 
-    .empty-state {
-      text-align: center;
-      padding: 3rem 1.5rem;
-      color: var(--text-dim);
-    }
-
-    .empty-state svg {
-      width: 64px;
-      height: 64px;
-      margin-bottom: 1rem;
-      opacity: 0.3;
-    }
-
-    .edit-input {
-      width: 100%;
-      padding: 0.5rem 0.75rem;
+    .btn-action:hover {
       background: var(--bg);
-      border: 2px solid var(--primary);
-      border-radius: 6px;
+      border-color: var(--text-soft);
       color: var(--text);
-      font-size: 0.95rem;
-      margin-bottom: 0.5rem;
     }
 
-    .edit-input:focus {
-      outline: none;
+    .btn-action.delete:hover {
+      border-color: var(--danger);
+      color: var(--danger);
     }
 
-    .stats {
-      padding: 1rem;
-      background: var(--surface-light);
-      border-top: 1px solid var(--border);
-      display: flex;
-      justify-content: space-between;
-      font-size: 0.85rem;
-      color: var(--text-dim);
-    }
-
-    /* Tablet and up */
-    @media (min-width: 640px) {
-      .app {
-        max-width: 600px;
-        margin: 0 auto;
-      }
-
-      .header {
-        padding: 2rem 1.5rem 1.5rem;
-      }
-
-      .header h1 {
-        font-size: 1.75rem;
-      }
-
-      .header p {
-        font-size: 0.9rem;
-      }
-
-      .add-task {
-        padding: 1rem 1.5rem;
-      }
-
-      .input-group {
-        flex-direction: row;
-      }
-
-      button {
-        width: auto;
-        white-space: nowrap;
-      }
-
-      .tasks {
-        padding: 1rem 1.5rem 2rem;
-      }
-
-      .task {
-        flex-direction: row;
-        align-items: flex-start;
-        gap: 1rem;
-      }
-
-      .task:hover {
-        border-color: var(--primary);
-        background: var(--bg);
-      }
-
-      .task-actions {
-        flex-direction: row;
-        flex-shrink: 0;
-      }
-
-      .btn-small {
-        flex: none;
-        padding: 0.5rem 0.75rem;
-      }
-
-      .btn-small:hover {
-        background: var(--surface-light);
-        transform: translateY(-1px);
-      }
-
-      .btn-delete:hover {
-        background: #dc2626;
-      }
-
-      button:hover {
-        background: var(--primary-dark);
-        transform: translateY(-1px);
-      }
-
-      .stats {
-        padding: 1rem 1.5rem;
-      }
-
-      .empty-state {
-        padding: 3rem 2rem;
-      }
-
-      .empty-state svg {
-        width: 80px;
-        height: 80px;
-      }
-    }
-
-    /* Media attachment styles */
+    /* Media buttons - subtle, only appear on hover */
     .media-buttons {
       display: flex;
-      gap: 0.5rem;
+      gap: 0.35rem;
       margin-top: 0.5rem;
-      flex-wrap: wrap;
+      opacity: 0;
+      transition: opacity 0.15s;
+    }
+
+    .task:hover .media-buttons,
+    .task:focus-within .media-buttons {
+      opacity: 1;
     }
 
     .btn-media {
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 0.35rem;
-      padding: 0.5rem 0.75rem;
-      font-size: 0.75rem;
-      background: var(--surface);
-      border: 1px solid var(--border);
-      color: var(--text-dim);
-      border-radius: 6px;
+      width: 28px;
+      height: 28px;
+      padding: 0;
+      background: var(--bg);
+      border: 1px solid var(--line);
+      border-radius: 50%;
+      color: var(--text-soft);
       cursor: pointer;
-      transition: all 0.2s;
-      flex: 1;
-      min-width: 0;
+      transition: all 0.15s;
     }
 
     .btn-media:hover {
-      background: var(--surface-light);
-      color: var(--text);
-      border-color: var(--primary);
+      background: var(--accent);
+      border-color: var(--accent);
+      color: white;
     }
 
     .btn-media.recording {
@@ -376,16 +351,16 @@
     }
 
     @keyframes pulse {
-      0%, 100% { opacity: 1; }
-      50% { opacity: 0.7; }
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.8; transform: scale(1.05); }
     }
 
     .btn-media svg {
-      width: 16px;
-      height: 16px;
-      flex-shrink: 0;
+      width: 14px;
+      height: 14px;
     }
 
+    /* Attachments */
     .attachments {
       display: flex;
       flex-direction: column;
@@ -395,17 +370,17 @@
 
     .attachment {
       position: relative;
-      border-radius: 8px;
+      border-radius: 6px;
       overflow: hidden;
       background: var(--bg);
-      border: 1px solid var(--border);
+      border: 1px solid var(--line);
     }
 
     .attachment img,
     .attachment video {
       display: block;
       width: 100%;
-      max-height: 200px;
+      max-height: 180px;
       object-fit: contain;
       background: var(--bg);
     }
@@ -420,19 +395,19 @@
       position: absolute;
       top: 0.35rem;
       right: 0.35rem;
-      width: 24px;
-      height: 24px;
+      width: 22px;
+      height: 22px;
       padding: 0;
-      background: rgba(0, 0, 0, 0.7);
+      background: rgba(61, 58, 52, 0.7);
       border: none;
       border-radius: 50%;
       color: white;
-      font-size: 14px;
+      font-size: 12px;
       cursor: pointer;
       display: flex;
       align-items: center;
       justify-content: center;
-      transition: all 0.2s;
+      transition: all 0.15s;
     }
 
     .btn-remove-attachment:hover {
@@ -456,47 +431,185 @@
       flex-shrink: 0;
     }
 
+    /* Edit input */
+    .edit-input {
+      width: 100%;
+      padding: 0.5rem 0;
+      background: transparent;
+      border: none;
+      border-bottom: 2px solid var(--accent);
+      color: var(--text);
+      font-family: inherit;
+      font-size: 1rem;
+    }
+
+    .edit-input:focus {
+      outline: none;
+    }
+
+    /* Empty state - warm and encouraging */
+    .empty-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--text-soft);
+    }
+
+    .empty-state .icon {
+      width: 80px;
+      height: 80px;
+      margin: 0 auto 1.25rem;
+      background: var(--bg);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .empty-state svg {
+      width: 36px;
+      height: 36px;
+      stroke: var(--accent-soft);
+    }
+
+    .empty-state h2 {
+      font-family: 'Caveat', cursive;
+      font-size: 1.75rem;
+      font-weight: 500;
+      color: var(--accent);
+      margin-bottom: 0.5rem;
+    }
+
+    .empty-state p {
+      font-size: 0.95rem;
+      font-style: italic;
+      max-width: 260px;
+      margin: 0 auto;
+      line-height: 1.5;
+    }
+
+    /* Footer stats - minimal */
+    .stats {
+      padding: 0.875rem 1.5rem;
+      background: var(--paper);
+      margin: 0 0.75rem;
+      border-radius: 0 0 4px 4px;
+      box-shadow:
+        0 2px 8px var(--shadow),
+        inset 0 1px 0 var(--line);
+      display: flex;
+      justify-content: space-between;
+      font-size: 0.8rem;
+      color: var(--text-soft);
+    }
+
+    .stats .completed-count {
+      color: var(--success);
+    }
+
+    /* Bottom breathing room */
+    .bottom-space {
+      height: 1.5rem;
+    }
+
+    /* Slide in animation */
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateX(-10px);
+      }
+      to {
+        opacity: 1;
+        transform: translateX(0);
+      }
+    }
+
+    .task {
+      animation: slideIn 0.25s ease;
+    }
+
+    /* Touch-friendly: always show actions on mobile */
+    @media (hover: none) {
+      .task-actions {
+        opacity: 1;
+      }
+
+      .media-buttons {
+        opacity: 1;
+      }
+    }
+
+    /* Larger screens */
+    @media (min-width: 600px) {
+      .header {
+        padding: 3rem 2rem 1.75rem;
+      }
+
+      .header h1 {
+        font-size: 3rem;
+      }
+
+      .paper {
+        margin: 0 1.5rem;
+        border-radius: 6px 6px 0 0;
+      }
+
+      .stats {
+        margin: 0 1.5rem;
+        border-radius: 0 0 6px 6px;
+      }
+
+      .add-task {
+        padding: 1.25rem 1.25rem 1.25rem 3.5rem;
+      }
+
+      .task {
+        padding: 1rem 1.25rem 1rem 3.5rem;
+      }
+
+      .paper::after {
+        left: 3rem;
+      }
+
+      .bottom-space {
+        height: 2rem;
+      }
+    }
+
     /* Hidden file inputs */
     .hidden-input {
       display: none;
-    }
-
-    @media (min-width: 640px) {
-      .media-buttons {
-        flex-wrap: nowrap;
-      }
-
-      .btn-media {
-        flex: none;
-      }
     }
   </style>
 </head>
 <body>
   <div class="app">
-    <div class="header">
-      <h1>Tasks</h1>
-      <p id="greeting">Get things done</p>
-    </div>
+    <header class="header">
+      <h1>Today</h1>
+      <p id="greeting">What matters most?</p>
+    </header>
 
-    <div class="add-task">
-      <form id="taskForm" class="input-group">
-        <input 
-          type="text" 
-          id="taskInput" 
-          placeholder="What needs to be done?"
-          autocomplete="off"
-        >
-        <button type="submit">Add Task</button>
-      </form>
-    </div>
+    <main class="paper">
+      <div class="add-task">
+        <form id="taskForm" class="input-group">
+          <input
+            type="text"
+            id="taskInput"
+            placeholder="What's on your mind?"
+            autocomplete="off"
+          >
+          <button type="submit" class="btn-add" aria-label="Add task">+</button>
+        </form>
+      </div>
 
-    <div class="tasks" id="taskList"></div>
+      <div class="tasks" id="taskList"></div>
+    </main>
 
-    <div class="stats">
-      <span id="taskCount">0 tasks</span>
-      <span id="completedCount">0 completed</span>
-    </div>
+    <footer class="stats">
+      <span id="taskCount">A blank page awaits</span>
+      <span id="completedCount" class="completed-count"></span>
+    </footer>
+
+    <div class="bottom-space"></div>
   </div>
 
   <script>
@@ -529,10 +642,10 @@
         try {
           const transaction = db.transaction([STORE_NAME], 'readwrite');
           const store = transaction.objectStore(STORE_NAME);
-          
+
           await store.clear();
           tasks.forEach(task => store.add(task));
-          
+
           transaction.oncomplete = () => resolve();
           transaction.onerror = () => reject(transaction.error);
         } catch (error) {
@@ -546,7 +659,7 @@
         const transaction = db.transaction([STORE_NAME], 'readonly');
         const store = transaction.objectStore(STORE_NAME);
         const request = store.getAll();
-        
+
         request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error);
       });
@@ -563,13 +676,18 @@
 
     function updateGreeting() {
       const hour = new Date().getHours();
-      let greetingText = 'Get things done';
-      
-      if (hour < 12) greetingText = 'Good morning';
-      else if (hour < 18) greetingText = 'Good afternoon';
-      else greetingText = 'Good evening';
-      
-      greeting.textContent = greetingText;
+      const greetings = {
+        morning: ['Good morning', 'Rise and shine', 'A fresh start'],
+        afternoon: ['Good afternoon', 'Keep going', 'You\'ve got this'],
+        evening: ['Good evening', 'Wind down', 'Almost there']
+      };
+
+      let timeOfDay = 'morning';
+      if (hour >= 12 && hour < 17) timeOfDay = 'afternoon';
+      else if (hour >= 17) timeOfDay = 'evening';
+
+      const options = greetings[timeOfDay];
+      greeting.textContent = options[Math.floor(Math.random() * options.length)];
     }
 
     function renderAttachments(attachments, taskIndex) {
@@ -610,10 +728,16 @@
       if (tasks.length === 0) {
         taskList.innerHTML = `
           <div class="empty-state">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-              <path d="M9 11l3 3L22 4M21 12v7a2 2 0 01-2 2H5a2 2 0 01-2-2V5a2 2 0 012-2h11"/>
-            </svg>
-            <p>No tasks yet. Add one above to get started.</p>
+            <div class="icon">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M12 19l7-7 3 3-7 7-3-3z"/>
+                <path d="M18 13l-1.5-7.5L2 2l3.5 14.5L13 18l5-5z"/>
+                <path d="M2 2l7.586 7.586"/>
+                <circle cx="11" cy="11" r="2"/>
+              </svg>
+            </div>
+            <h2>A blank canvas</h2>
+            <p>Write down what matters. The small things count too.</p>
           </div>
         `;
       } else {
@@ -621,48 +745,42 @@
           const isRecording = recordingTaskIndex === index;
           return `
           <div class="task ${task.completed ? 'completed' : ''}" data-index="${index}">
-            <div class="task-header">
-              <div class="checkbox" onclick="toggleTask(${index})"></div>
-              <div class="task-content">
-                ${task.editing ?
-                  `<input type="text" class="edit-input" value="${escapeHtml(task.text)}" onblur="saveEdit(${index}, this.value)" onkeypress="if(event.key === 'Enter') saveEdit(${index}, this.value)" autofocus>` :
-                  `<div class="task-text" ondblclick="editTask(${index})">${escapeHtml(task.text)}</div>`
-                }
-                ${renderAttachments(task.attachments, index)}
-                <div class="media-buttons">
-                  <button class="btn-media ${isRecording ? 'recording' : ''}" onclick="toggleAudioRecording(${index})">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                      <path d="M19 10v2a7 7 0 0 1-14 0v-2M12 19v4M8 23h8"/>
-                    </svg>
-                    ${isRecording ? 'Stop' : 'Audio'}
-                  </button>
-                  <button class="btn-media" onclick="capturePhoto(${index})">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                      <circle cx="12" cy="13" r="4"/>
-                    </svg>
-                    Photo
-                  </button>
-                  <button class="btn-media" onclick="captureVideo(${index})">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <polygon points="23 7 16 12 23 17 23 7"/>
-                      <rect x="1" y="5" width="15" height="14" rx="2" ry="2"/>
-                    </svg>
-                    Video
-                  </button>
-                  <button class="btn-media" onclick="pickFile(${index})">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                      <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                    </svg>
-                    File
-                  </button>
-                </div>
+            <div class="checkbox" onclick="toggleTask(${index})"></div>
+            <div class="task-content">
+              ${task.editing ?
+                `<input type="text" class="edit-input" value="${escapeHtml(task.text)}" onblur="saveEdit(${index}, this.value)" onkeypress="if(event.key === 'Enter') saveEdit(${index}, this.value)" onkeydown="if(event.key === 'Escape') { event.target.blur(); }" autofocus>` :
+                `<div class="task-text" ondblclick="editTask(${index})">${escapeHtml(task.text)}</div>`
+              }
+              ${renderAttachments(task.attachments, index)}
+              <div class="media-buttons">
+                <button class="btn-media ${isRecording ? 'recording' : ''}" onclick="toggleAudioRecording(${index})" title="Record audio">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                  </svg>
+                </button>
+                <button class="btn-media" onclick="capturePhoto(${index})" title="Take photo">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="13" r="4"/>
+                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                  </svg>
+                </button>
+                <button class="btn-media" onclick="captureVideo(${index})" title="Record video">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polygon points="23 7 16 12 23 17 23 7"/>
+                    <rect x="1" y="5" width="15" height="14" rx="2"/>
+                  </svg>
+                </button>
+                <button class="btn-media" onclick="pickFile(${index})" title="Attach file">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                  </svg>
+                </button>
               </div>
             </div>
             <div class="task-actions">
-              <button class="btn-small" onclick="editTask(${index})">Edit</button>
-              <button class="btn-small btn-delete" onclick="deleteTask(${index})">Delete</button>
+              <button class="btn-action" onclick="editTask(${index})">Edit</button>
+              <button class="btn-action delete" onclick="deleteTask(${index})">Delete</button>
             </div>
           </div>
         `}).join('');
@@ -680,24 +798,38 @@
     function updateStats() {
       const total = tasks.length;
       const completed = tasks.filter(t => t.completed).length;
-      
-      taskCount.textContent = `${total} ${total === 1 ? 'task' : 'tasks'}`;
-      completedCount.textContent = `${completed} completed`;
+
+      if (total === 0) {
+        taskCount.textContent = 'A blank page awaits';
+        completedCount.textContent = '';
+      } else if (total === 1) {
+        taskCount.textContent = '1 thing to do';
+        completedCount.textContent = completed ? '✓ done' : '';
+      } else {
+        const remaining = total - completed;
+        if (remaining === 0) {
+          taskCount.textContent = 'All done!';
+          completedCount.textContent = `${completed} completed`;
+        } else {
+          taskCount.textContent = `${remaining} ${remaining === 1 ? 'thing' : 'things'} left`;
+          completedCount.textContent = completed ? `${completed} done` : '';
+        }
+      }
     }
 
     taskForm.addEventListener('submit', async (e) => {
       e.preventDefault();
-      
+
       const text = taskInput.value.trim();
       if (!text) return;
-      
+
       tasks.push({
         text,
         completed: false,
         editing: false,
         createdAt: Date.now()
       });
-      
+
       taskInput.value = '';
       await saveTasks(tasks);
       renderTasks();
@@ -712,6 +844,14 @@
     window.editTask = (index) => {
       tasks.forEach((t, i) => t.editing = i === index);
       renderTasks();
+      // Focus at end of input
+      setTimeout(() => {
+        const input = document.querySelector('.edit-input');
+        if (input) {
+          input.focus();
+          input.setSelectionRange(input.value.length, input.value.length);
+        }
+      }, 10);
     };
 
     window.saveEdit = async (index, newText) => {
@@ -725,7 +865,7 @@
     };
 
     window.deleteTask = async (index) => {
-      if (confirm('Delete this task?')) {
+      if (confirm('Remove this task?')) {
         tasks.splice(index, 1);
         await saveTasks(tasks);
         renderTasks();
@@ -792,21 +932,17 @@
     window.capturePhoto = async (index) => {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
-        const video = document.createElement('video');
-        video.srcObject = stream;
-        video.autoplay = true;
-        video.playsInline = true;
 
-        // Create capture modal
+        // Create capture modal with paper theme
         const modal = document.createElement('div');
-        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(61,58,52,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
         modal.innerHTML = `
           <div style="position:relative;width:100%;max-width:400px;">
-            <video autoplay playsinline style="width:100%;border-radius:8px;"></video>
+            <video autoplay playsinline style="width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);"></video>
           </div>
-          <div style="margin-top:1rem;display:flex;gap:1rem;">
-            <button id="captureBtn" style="padding:1rem 2rem;background:var(--primary);border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;">Capture</button>
-            <button id="cancelBtn" style="padding:1rem 2rem;background:var(--surface-light);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;cursor:pointer;">Cancel</button>
+          <div style="margin-top:1.5rem;display:flex;gap:1rem;">
+            <button id="captureBtn" style="padding:0.875rem 2rem;background:#c1765a;border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Capture</button>
+            <button id="cancelBtn" style="padding:0.875rem 2rem;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Cancel</button>
           </div>
         `;
         document.body.appendChild(modal);
@@ -842,14 +978,14 @@
         let videoChunks = [];
 
         const modal = document.createElement('div');
-        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(0,0,0,0.9);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(61,58,52,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
         modal.innerHTML = `
           <div style="position:relative;width:100%;max-width:400px;">
-            <video autoplay playsinline muted style="width:100%;border-radius:8px;"></video>
+            <video autoplay playsinline muted style="width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);"></video>
           </div>
-          <div style="margin-top:1rem;display:flex;gap:1rem;">
-            <button id="recordBtn" style="padding:1rem 2rem;background:var(--danger);border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;">Start Recording</button>
-            <button id="cancelBtn" style="padding:1rem 2rem;background:var(--surface-light);border:1px solid var(--border);border-radius:8px;color:var(--text);font-size:1rem;cursor:pointer;">Cancel</button>
+          <div style="margin-top:1.5rem;display:flex;gap:1rem;">
+            <button id="recordBtn" style="padding:0.875rem 2rem;background:#c96b6b;border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Start Recording</button>
+            <button id="cancelBtn" style="padding:0.875rem 2rem;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Cancel</button>
           </div>
         `;
         document.body.appendChild(modal);
@@ -885,7 +1021,7 @@
             };
             videoRecorder.start();
             recordBtn.textContent = 'Stop Recording';
-            recordBtn.style.background = 'var(--success)';
+            recordBtn.style.background = '#7a9e7e';
             isRecording = true;
           } else {
             videoRecorder.stop();
