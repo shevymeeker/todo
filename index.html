@@ -4,8 +4,15 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta name="theme-color" content="#f5f1eb">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
+  <meta name="apple-mobile-web-app-title" content="Today">
+  <meta name="mobile-web-app-capable" content="yes">
+  <meta name="description" content="A beautiful daily task, interruption, and insight tracker">
   <title>Today</title>
-  <link rel="manifest" href="data:application/json;base64,eyJuYW1lIjoiVG9kYXkiLCJzaG9ydF9uYW1lIjoiVG9kYXkiLCJzdGFydF91cmwiOiIuLyIsImRpc3BsYXkiOiJzdGFuZGFsb25lIiwiYmFja2dyb3VuZF9jb2xvciI6IiNmNWYxZWIiLCJ0aGVtZV9jb2xvciI6IiNmNWYxZWIiLCJpY29ucyI6W3sic3JjIjoiZGF0YTppbWFnZS9zdmcreG1sLCUzY3N2ZyB4bWxucz0naHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmcnIHZpZXdCb3g9JzAgMCA1MTIgNTEyJyUzZSUzY3JlY3QgZmlsbD0nJTIzZjVmMWViJyB3aWR0aD0nNTEyJyBoZWlnaHQ9JzUxMicgcng9JzY0Jy8lM2UlM2NwYXRoIGZpbGw9JyUyM2MxNzY1YScgZD0nTTE0MCAxOTJoMjMydjMySDEyMHptMCA3MmgyMzJ2MzJIMTQwem0wIDcyaDE2MHYzMkgxNDB6Jy8lM2UlM2MvL3N2ZyUzZSIsInNpemVzIjoiNTEyeDUxMiIsInR5cGUiOiJpbWFnZS9zdmcreG1sIn1dfQ==">
+  <link rel="manifest" href="manifest.json">
+  <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
+  <link rel="apple-touch-icon" href="icons/icon-192.png">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Caveat:wght@500&family=Source+Serif+4:opsz,wght@8..60,400;8..60,600&display=swap" rel="stylesheet">
@@ -758,9 +765,196 @@
     .hidden-input {
       display: none;
     }
+
+    /* PWA Install Banner */
+    .install-banner {
+      position: fixed;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      background: var(--paper);
+      padding: 1rem 1.25rem;
+      box-shadow: 0 -4px 20px rgba(61, 58, 52, 0.15);
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1000;
+      animation: slideUp 0.3s ease;
+    }
+
+    @keyframes slideUp {
+      from {
+        transform: translateY(100%);
+        opacity: 0;
+      }
+      to {
+        transform: translateY(0);
+        opacity: 1;
+      }
+    }
+
+    .install-banner.show {
+      display: flex;
+    }
+
+    .install-banner-icon {
+      width: 48px;
+      height: 48px;
+      border-radius: 10px;
+      flex-shrink: 0;
+    }
+
+    .install-banner-content {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .install-banner-title {
+      font-family: 'Caveat', cursive;
+      font-size: 1.25rem;
+      color: var(--accent);
+      margin-bottom: 0.15rem;
+    }
+
+    .install-banner-text {
+      font-size: 0.85rem;
+      color: var(--text-soft);
+    }
+
+    .install-banner-actions {
+      display: flex;
+      gap: 0.5rem;
+      flex-shrink: 0;
+    }
+
+    .btn-install {
+      padding: 0.6rem 1.25rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 6px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.9rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-install:hover {
+      filter: brightness(0.9);
+      transform: scale(1.02);
+    }
+
+    .btn-dismiss {
+      padding: 0.6rem;
+      background: transparent;
+      border: none;
+      color: var(--text-soft);
+      font-size: 1.25rem;
+      cursor: pointer;
+      line-height: 1;
+      border-radius: 4px;
+      transition: all 0.2s;
+    }
+
+    .btn-dismiss:hover {
+      background: var(--bg);
+      color: var(--text);
+    }
+
+    /* Offline indicator */
+    .offline-indicator {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      background: var(--text);
+      color: white;
+      padding: 0.5rem;
+      text-align: center;
+      font-size: 0.8rem;
+      transform: translateY(-100%);
+      transition: transform 0.3s ease;
+      z-index: 1001;
+    }
+
+    .offline-indicator.show {
+      transform: translateY(0);
+    }
+
+    /* Update available banner */
+    .update-banner {
+      position: fixed;
+      top: 1rem;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--paper);
+      padding: 0.75rem 1.25rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(61, 58, 52, 0.2);
+      display: none;
+      align-items: center;
+      gap: 1rem;
+      z-index: 1000;
+      animation: fadeIn 0.3s ease;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translate(-50%, -10px); }
+      to { opacity: 1; transform: translate(-50%, 0); }
+    }
+
+    .update-banner.show {
+      display: flex;
+    }
+
+    .update-banner span {
+      font-size: 0.9rem;
+      color: var(--text);
+    }
+
+    .btn-update {
+      padding: 0.4rem 0.875rem;
+      background: var(--success);
+      border: none;
+      border-radius: 4px;
+      color: white;
+      font-family: inherit;
+      font-size: 0.85rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-update:hover {
+      filter: brightness(0.9);
+    }
   </style>
 </head>
 <body>
+  <!-- Offline indicator -->
+  <div class="offline-indicator" id="offlineIndicator">
+    You're offline. Changes will sync when connected.
+  </div>
+
+  <!-- Update available banner -->
+  <div class="update-banner" id="updateBanner">
+    <span>A new version is available!</span>
+    <button class="btn-update" id="updateBtn">Update</button>
+  </div>
+
+  <!-- Install prompt banner -->
+  <div class="install-banner" id="installBanner">
+    <img class="install-banner-icon" src="icons/icon-96.png" alt="Today App">
+    <div class="install-banner-content">
+      <div class="install-banner-title">Install Today</div>
+      <div class="install-banner-text">Add to your home screen for quick access</div>
+    </div>
+    <div class="install-banner-actions">
+      <button class="btn-install" id="installBtn">Install</button>
+      <button class="btn-dismiss" id="dismissBtn">&times;</button>
+    </div>
+  </div>
+
   <div class="app">
     <header class="header">
       <h1>Today</h1>
@@ -1371,6 +1565,115 @@
     }
 
     init();
+
+    // ==========================================
+    // PWA: Service Worker & Install Prompt
+    // ==========================================
+
+    let deferredPrompt = null;
+    let swRegistration = null;
+
+    // Register service worker
+    if ('serviceWorker' in navigator) {
+      window.addEventListener('load', async () => {
+        try {
+          swRegistration = await navigator.serviceWorker.register('./sw.js');
+          console.log('Service Worker registered:', swRegistration.scope);
+
+          // Check for updates
+          swRegistration.addEventListener('updatefound', () => {
+            const newWorker = swRegistration.installing;
+            newWorker.addEventListener('statechange', () => {
+              if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
+                // New content available, show update banner
+                document.getElementById('updateBanner').classList.add('show');
+              }
+            });
+          });
+        } catch (error) {
+          console.error('Service Worker registration failed:', error);
+        }
+      });
+
+      // Handle controller change (when new SW takes over)
+      navigator.serviceWorker.addEventListener('controllerchange', () => {
+        window.location.reload();
+      });
+    }
+
+    // Update button click handler
+    document.getElementById('updateBtn').addEventListener('click', () => {
+      if (swRegistration && swRegistration.waiting) {
+        swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
+      }
+      document.getElementById('updateBanner').classList.remove('show');
+    });
+
+    // Install prompt handling
+    window.addEventListener('beforeinstallprompt', (e) => {
+      // Prevent the mini-infobar from appearing
+      e.preventDefault();
+      // Store the event for later use
+      deferredPrompt = e;
+
+      // Check if user has dismissed the banner before
+      const dismissed = localStorage.getItem('installBannerDismissed');
+      const dismissedTime = dismissed ? parseInt(dismissed, 10) : 0;
+      const daysSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
+
+      // Show install banner if not dismissed recently (within 7 days)
+      if (!dismissed || daysSinceDismissed > 7) {
+        setTimeout(() => {
+          document.getElementById('installBanner').classList.add('show');
+        }, 2000); // Show after 2 seconds
+      }
+    });
+
+    // Install button click handler
+    document.getElementById('installBtn').addEventListener('click', async () => {
+      if (!deferredPrompt) return;
+
+      // Show the install prompt
+      deferredPrompt.prompt();
+
+      // Wait for user response
+      const { outcome } = await deferredPrompt.userChoice;
+      console.log('Install prompt outcome:', outcome);
+
+      // Clear the deferred prompt
+      deferredPrompt = null;
+
+      // Hide the banner
+      document.getElementById('installBanner').classList.remove('show');
+    });
+
+    // Dismiss button click handler
+    document.getElementById('dismissBtn').addEventListener('click', () => {
+      document.getElementById('installBanner').classList.remove('show');
+      localStorage.setItem('installBannerDismissed', Date.now().toString());
+    });
+
+    // Handle app installed event
+    window.addEventListener('appinstalled', () => {
+      console.log('App installed successfully');
+      document.getElementById('installBanner').classList.remove('show');
+      deferredPrompt = null;
+    });
+
+    // Offline/Online status handling
+    const offlineIndicator = document.getElementById('offlineIndicator');
+
+    function updateOnlineStatus() {
+      if (!navigator.onLine) {
+        offlineIndicator.classList.add('show');
+      } else {
+        offlineIndicator.classList.remove('show');
+      }
+    }
+
+    window.addEventListener('online', updateOnlineStatus);
+    window.addEventListener('offline', updateOnlineStatus);
+    updateOnlineStatus();
   </script>
 </body>
 </html>
