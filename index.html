@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
+  <meta name="theme-color" content="#1a2340">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Today">
+  <meta name="apple-mobile-web-app-title" content="Dayslayer">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="description" content="A beautiful daily task, interruption, and insight tracker">
-  <title>Today</title>
+  <meta name="description" content="Slay your day. Track tasks, interruptions, and insights.">
+  <title>Wildman Dayslayer</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -24,22 +24,22 @@
     }
 
     :root {
-      --paper: #fffef9;
-      --bg: #f5f1eb;
-      --text: #3d3a34;
-      --text-soft: #8a857a;
-      --text-faded: #b8b3a8;
-      --line: #e8e4dc;
-      --accent: #c1765a;
-      --accent-soft: #d4a088;
-      --success: #7a9e7e;
-      --success-soft: #a8c4ab;
-      --danger: #c96b6b;
-      --interrupt: #8b7ec8;
-      --interrupt-soft: #b5aad9;
-      --learned: #d4a84b;
-      --learned-soft: #e6c97a;
-      --shadow: rgba(61, 58, 52, 0.08);
+      --paper: #f0f2f8;
+      --bg: #1a2340;
+      --text: #1c2235;
+      --text-soft: #5a6380;
+      --text-faded: #8e95aa;
+      --line: #d4d8e5;
+      --accent: #2d3a5e;
+      --accent-soft: #4a5a82;
+      --success: #3d8b5e;
+      --success-soft: #6aad85;
+      --danger: #c94444;
+      --interrupt: #7b5ea7;
+      --interrupt-soft: #a48bcf;
+      --learned: #c4880d;
+      --learned-soft: #daa73e;
+      --shadow: rgba(26, 35, 64, 0.12);
     }
 
     html {
@@ -196,17 +196,17 @@
       bottom: 0;
       left: 2.5rem;
       width: 1px;
-      background: #efd5d0;
+      background: #c4c8d8;
       pointer-events: none;
       transition: background 0.3s;
     }
 
     .paper.interruptions::after {
-      background: #d5d0ef;
+      background: #c8c0e0;
     }
 
     .paper.learned::after {
-      background: #efe5d0;
+      background: #ddd0a8;
     }
 
     /* Add entry area */
@@ -944,9 +944,9 @@
 
   <!-- Install prompt banner -->
   <div class="install-banner" id="installBanner">
-    <img class="install-banner-icon" src="icons/icon-96.png" alt="Today App">
+    <img class="install-banner-icon" src="icons/icon-96.png" alt="Wildman Dayslayer">
     <div class="install-banner-content">
-      <div class="install-banner-title">Install Today</div>
+      <div class="install-banner-title">Install Dayslayer</div>
       <div class="install-banner-text">Add to your home screen for quick access</div>
     </div>
     <div class="install-banner-actions">
@@ -957,7 +957,7 @@
 
   <div class="app">
     <header class="header">
-      <h1>Today</h1>
+      <h1>Wildman Dayslayer</h1>
       <p id="greeting">What matters most?</p>
     </header>
 
@@ -1005,7 +1005,7 @@
     </main>
 
     <footer class="stats">
-      <span id="statsLeft">A blank page awaits</span>
+      <span id="statsLeft">Ready to slay</span>
       <span id="statsRight"></span>
     </footer>
 
@@ -1013,7 +1013,7 @@
   </div>
 
   <script>
-    const DB_NAME = 'TodayDB';
+    const DB_NAME = 'DayslayerDB';
     const DB_VERSION = 3;
     const STORE_NAME = 'entries';
     let db;
@@ -1038,8 +1038,8 @@
           <path d="M2 2l7.586 7.586"/>
           <circle cx="11" cy="11" r="2"/>
         </svg>`,
-        title: "A blank canvas",
-        text: "Write down what matters. The small things count too."
+        title: "Ready to slay",
+        text: "Write down what needs conquering. No task too small."
       },
       interruptions: {
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1118,9 +1118,9 @@
     function updateGreeting() {
       const hour = new Date().getHours();
       const greetings = {
-        morning: ['Good morning', 'Rise and shine', 'A fresh start'],
-        afternoon: ['Good afternoon', 'Keep going', 'You\'ve got this'],
-        evening: ['Good evening', 'Wind down', 'Almost there']
+        morning: ['Rise and slay', 'Morning, wildman', 'Time to conquer'],
+        afternoon: ['Keep slaying', 'Halfway conquered', 'No stopping now'],
+        evening: ['Final push', 'Almost slayed it', 'Finish strong']
       };
 
       let timeOfDay = 'morning';
@@ -1287,7 +1287,7 @@
       const total = tasks.length + interruptions + learned;
 
       if (total === 0) {
-        statsLeft.textContent = 'A blank page awaits';
+        statsLeft.textContent = 'Ready to slay';
         statsRight.textContent = '';
       } else {
         // Build a summary
@@ -1437,13 +1437,13 @@
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
 
         const modal = document.createElement('div');
-        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(61,58,52,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(26,35,64,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
         modal.innerHTML = `
           <div style="position:relative;width:100%;max-width:400px;">
             <video autoplay playsinline style="width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);"></video>
           </div>
           <div style="margin-top:1.5rem;display:flex;gap:1rem;">
-            <button id="captureBtn" style="padding:0.875rem 2rem;background:#c1765a;border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Capture</button>
+            <button id="captureBtn" style="padding:0.875rem 2rem;background:#2d3a5e;border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Capture</button>
             <button id="cancelBtn" style="padding:0.875rem 2rem;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Cancel</button>
           </div>
         `;
@@ -1480,7 +1480,7 @@
         let videoChunks = [];
 
         const modal = document.createElement('div');
-        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(61,58,52,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
+        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(26,35,64,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
         modal.innerHTML = `
           <div style="position:relative;width:100%;max-width:400px;">
             <video autoplay playsinline muted style="width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);"></video>
