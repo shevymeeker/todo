@@ -1,12 +1,12 @@
 {
-  "name": "Today - Tasks & Notes",
-  "short_name": "Today",
-  "description": "A beautiful daily task, interruption, and insight tracker",
+  "name": "Wildman Dayslayer",
+  "short_name": "Dayslayer",
+  "description": "Slay your day. Track tasks, interruptions, and insights.",
   "start_url": "./",
   "scope": "./",
   "display": "standalone",
-  "background_color": "#f5f1eb",
-  "theme_color": "#f5f1eb",
+  "background_color": "#1a2340",
+  "theme_color": "#1a2340",
   "orientation": "portrait-primary",
   "categories": ["productivity", "utilities"],
   "icons": [
