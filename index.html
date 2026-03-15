@@ -3,13 +3,13 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#f5f1eb">
+  <meta name="theme-color" content="#1a2340">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
-  <meta name="apple-mobile-web-app-title" content="Today">
+  <meta name="apple-mobile-web-app-title" content="Dayslayer">
   <meta name="mobile-web-app-capable" content="yes">
-  <meta name="description" content="A beautiful daily task, interruption, and insight tracker">
-  <title>Today</title>
+  <meta name="description" content="Slay your day. Track tasks, interruptions, and insights.">
+  <title>Wildman Dayslayer</title>
   <link rel="manifest" href="manifest.json">
   <link rel="icon" type="image/png" sizes="192x192" href="icons/icon-192.png">
   <link rel="apple-touch-icon" href="icons/icon-192.png">
@@ -24,22 +24,22 @@
     }
 
     :root {
-      --paper: #fffef9;
-      --bg: #f5f1eb;
-      --text: #3d3a34;
-      --text-soft: #8a857a;
-      --text-faded: #b8b3a8;
-      --line: #e8e4dc;
-      --accent: #c1765a;
-      --accent-soft: #d4a088;
-      --success: #7a9e7e;
-      --success-soft: #a8c4ab;
-      --danger: #c96b6b;
-      --interrupt: #8b7ec8;
-      --interrupt-soft: #b5aad9;
-      --learned: #d4a84b;
-      --learned-soft: #e6c97a;
-      --shadow: rgba(61, 58, 52, 0.08);
+      --paper: #f0f2f8;
+      --bg: #1a2340;
+      --text: #1c2235;
+      --text-soft: #5a6380;
+      --text-faded: #8e95aa;
+      --line: #d4d8e5;
+      --accent: #2d3a5e;
+      --accent-soft: #4a5a82;
+      --success: #3d8b5e;
+      --success-soft: #6aad85;
+      --danger: #c94444;
+      --interrupt: #7b5ea7;
+      --interrupt-soft: #a48bcf;
+      --learned: #c4880d;
+      --learned-soft: #daa73e;
+      --shadow: rgba(26, 35, 64, 0.12);
     }
 
     html {
@@ -196,17 +196,17 @@
       bottom: 0;
       left: 2.5rem;
       width: 1px;
-      background: #efd5d0;
+      background: #c4c8d8;
       pointer-events: none;
       transition: background 0.3s;
     }
 
     .paper.interruptions::after {
-      background: #d5d0ef;
+      background: #c8c0e0;
     }
 
     .paper.learned::after {
-      background: #efe5d0;
+      background: #ddd0a8;
     }
 
     /* Add entry area */
@@ -460,6 +460,21 @@
       color: var(--danger);
     }
 
+    .btn-action.confirm:hover {
+      border-color: var(--danger);
+      background: var(--danger);
+      color: white;
+    }
+
+    /* Inline delete confirmation row */
+    .delete-confirm {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.8rem;
+      color: var(--danger);
+    }
+
     /* Media buttons */
     .media-buttons {
       display: flex;
@@ -659,6 +674,29 @@
       color: var(--learned);
     }
 
+    /* Error state */
+    .error-state {
+      text-align: center;
+      padding: 3rem 2rem;
+      color: var(--danger);
+    }
+
+    .error-state p {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+    }
+
+    .error-state button {
+      padding: 0.5rem 1.25rem;
+      background: var(--accent);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-family: inherit;
+      font-size: 0.9rem;
+    }
+
     /* Footer stats */
     .stats {
       padding: 0.875rem 1.5rem;
@@ -760,10 +798,6 @@
       .bottom-space {
         height: 2rem;
       }
-    }
-
-    .hidden-input {
-      display: none;
     }
 
     /* PWA Install Banner */
@@ -928,6 +962,77 @@
     .btn-update:hover {
       filter: brightness(0.9);
     }
+
+    /* Camera / video capture modal */
+    .capture-modal {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(26, 35, 64, 0.95);
+      z-index: 1000;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 1rem;
+    }
+
+    .capture-modal-preview {
+      position: relative;
+      width: 100%;
+      max-width: 400px;
+    }
+
+    .capture-modal-preview video {
+      width: 100%;
+      border-radius: 8px;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+    }
+
+    .capture-modal-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+    }
+
+    .btn-capture-primary {
+      padding: 0.875rem 2rem;
+      background: var(--accent);
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-capture-record {
+      padding: 0.875rem 2rem;
+      background: #c96b6b;
+      border: none;
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
+
+    .btn-capture-record.recording {
+      background: var(--success-soft);
+    }
+
+    .btn-capture-cancel {
+      padding: 0.875rem 2rem;
+      background: transparent;
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      border-radius: 8px;
+      color: white;
+      font-size: 1rem;
+      cursor: pointer;
+      font-family: inherit;
+    }
   </style>
 </head>
 <body>
@@ -944,9 +1049,9 @@
 
   <!-- Install prompt banner -->
   <div class="install-banner" id="installBanner">
-    <img class="install-banner-icon" src="icons/icon-96.png" alt="Today App">
+    <img class="install-banner-icon" src="icons/icon-96.png" alt="Wildman Dayslayer">
     <div class="install-banner-content">
-      <div class="install-banner-title">Install Today</div>
+      <div class="install-banner-title">Install Dayslayer</div>
       <div class="install-banner-text">Add to your home screen for quick access</div>
     </div>
     <div class="install-banner-actions">
@@ -957,7 +1062,7 @@
 
   <div class="app">
     <header class="header">
-      <h1>Today</h1>
+      <h1>Wildman Dayslayer</h1>
       <p id="greeting">What matters most?</p>
     </header>
 
@@ -1005,7 +1110,7 @@
     </main>
 
     <footer class="stats">
-      <span id="statsLeft">A blank page awaits</span>
+      <span id="statsLeft">Ready to slay</span>
       <span id="statsRight"></span>
     </footer>
 
@@ -1013,14 +1118,52 @@
   </div>
 
   <script>
-    const DB_NAME = 'TodayDB';
-    const DB_VERSION = 3;
+    // ==========================================
+    // DB constants
+    // v1: entries store with type index
+    // v2-v3: UI-only changes, no schema changes
+    // v4: attachments object store for Blob storage
+    // ==========================================
+    const DB_NAME = 'DayslayerDB';
+    const DB_VERSION = 4;
     const STORE_NAME = 'entries';
+    const ATTACH_STORE = 'attachments';
+
     let db;
     let mediaRecorder = null;
     let audioChunks = [];
-    let recordingEntryIndex = null;
+    let recordingEntryId = null;
+    let currentAudioMime = '';
     let currentTab = 'tasks';
+
+    // UI state — not stored in entry records
+    let editingId = null;
+    let pendingDeleteId = null;
+
+    // Cache of attachment ID → { url, type } for the current render
+    const objectUrlCache = new Map();
+
+    // Supported MIME type candidates in priority order
+    const AUDIO_MIME_CANDIDATES = [
+      'audio/webm;codecs=opus',
+      'audio/webm',
+      'audio/ogg;codecs=opus',
+      'audio/mp4'
+    ];
+    const VIDEO_MIME_CANDIDATES = [
+      'video/webm;codecs=vp9,opus',
+      'video/webm;codecs=vp8,opus',
+      'video/webm',
+      'video/mp4'
+    ];
+
+    function getSupportedMimeType(candidates) {
+      if (typeof MediaRecorder === 'undefined') return '';
+      for (const type of candidates) {
+        if (MediaRecorder.isTypeSupported(type)) return type;
+      }
+      return '';
+    }
 
     // Placeholders for each tab
     const placeholders = {
@@ -1038,15 +1181,15 @@
           <path d="M2 2l7.586 7.586"/>
           <circle cx="11" cy="11" r="2"/>
         </svg>`,
-        title: "A blank canvas",
-        text: "Write down what matters. The small things count too."
+        title: "Ready to slay",
+        text: "Write down what needs conquering. No task too small."
       },
       interruptions: {
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
           <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/>
         </svg>`,
         title: "No interruptions yet",
-        text: "When life happens, write it here. It's not your fault\u2014it's just reality."
+        text: "When life happens, write it here. It\u2019s not your fault\u2014it\u2019s just reality."
       },
       learned: {
         icon: `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
@@ -1059,6 +1202,10 @@
       }
     };
 
+    // ==========================================
+    // IndexedDB — entries
+    // ==========================================
+
     function openDB() {
       return new Promise((resolve, reject) => {
         const request = indexedDB.open(DB_NAME, DB_VERSION);
@@ -1067,29 +1214,34 @@
         request.onsuccess = () => resolve(request.result);
 
         request.onupgradeneeded = (event) => {
-          const db = event.target.result;
-          if (!db.objectStoreNames.contains(STORE_NAME)) {
-            const store = db.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
+          const database = event.target.result;
+          const { oldVersion } = event;
+
+          // v1: entries store with type index
+          if (oldVersion < 1) {
+            const store = database.createObjectStore(STORE_NAME, { keyPath: 'id', autoIncrement: true });
             store.createIndex('type', 'type', { unique: false });
+          }
+
+          // v2, v3: no schema changes
+
+          // v4: separate attachments store for native Blob storage
+          if (oldVersion < 4) {
+            database.createObjectStore(ATTACH_STORE, { keyPath: 'id', autoIncrement: true });
           }
         };
       });
     }
 
-    function saveEntries(entries) {
-      return new Promise(async (resolve, reject) => {
-        try {
-          const transaction = db.transaction([STORE_NAME], 'readwrite');
-          const store = transaction.objectStore(STORE_NAME);
-
-          await store.clear();
-          entries.forEach(entry => store.add(entry));
-
-          transaction.oncomplete = () => resolve();
-          transaction.onerror = () => reject(transaction.error);
-        } catch (error) {
-          reject(error);
-        }
+    // Write or delete a single entry. op='put' upserts; op='delete' removes by id.
+    // Returns the record key for 'put' (useful for new inserts).
+    function saveEntry(entry, op = 'put') {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([STORE_NAME], 'readwrite');
+        const store = transaction.objectStore(STORE_NAME);
+        const req = op === 'delete' ? store.delete(entry.id) : store.put(entry);
+        req.onsuccess = () => resolve(req.result);
+        transaction.onerror = () => reject(transaction.error);
       });
     }
 
@@ -1098,13 +1250,127 @@
         const transaction = db.transaction([STORE_NAME], 'readonly');
         const store = transaction.objectStore(STORE_NAME);
         const request = store.getAll();
-
         request.onsuccess = () => resolve(request.result);
         request.onerror = () => reject(request.error);
       });
     }
 
+    // ==========================================
+    // IndexedDB — attachments (Blob storage)
+    // ==========================================
+
+    function saveAttachmentBlob(blob, type) {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([ATTACH_STORE], 'readwrite');
+        const store = transaction.objectStore(ATTACH_STORE);
+        const req = store.put({ blob, type, createdAt: Date.now() });
+        req.onsuccess = () => resolve(req.result); // auto-generated id
+        transaction.onerror = () => reject(transaction.error);
+      });
+    }
+
+    function getAttachmentRecord(id) {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([ATTACH_STORE], 'readonly');
+        const store = transaction.objectStore(ATTACH_STORE);
+        const req = store.get(id);
+        req.onsuccess = () => resolve(req.result);
+        transaction.onerror = () => reject(transaction.error);
+      });
+    }
+
+    function deleteAttachmentRecord(id) {
+      return new Promise((resolve, reject) => {
+        const transaction = db.transaction([ATTACH_STORE], 'readwrite');
+        const store = transaction.objectStore(ATTACH_STORE);
+        store.delete(id);
+        transaction.oncomplete = () => resolve();
+        transaction.onerror = () => reject(transaction.error);
+      });
+    }
+
+    // ==========================================
+    // Migration: inline base64 → Blob store
+    // ==========================================
+
+    function dataUrlToBlob(dataUrl) {
+      const [header, b64] = dataUrl.split(',');
+      const type = header.match(/:(.*?);/)[1];
+      const binary = atob(b64);
+      const bytes = new Uint8Array(binary.length);
+      for (let i = 0; i < binary.length; i++) bytes[i] = binary.charCodeAt(i);
+      return new Blob([bytes], { type });
+    }
+
+    async function migrateAttachments() {
+      const toMigrate = entries.filter(e =>
+        Array.isArray(e.attachments) &&
+        e.attachments.some(a => a && typeof a === 'object' && a.data)
+      );
+      for (const entry of toMigrate) {
+        const newIds = [];
+        for (const att of entry.attachments) {
+          if (att && typeof att === 'object' && att.data) {
+            try {
+              const blob = dataUrlToBlob(att.data);
+              const id = await saveAttachmentBlob(blob, att.type || blob.type);
+              newIds.push(id);
+            } catch (err) {
+              console.warn('Failed to migrate attachment:', err);
+            }
+          } else if (typeof att === 'number') {
+            newIds.push(att); // already new format
+          }
+        }
+        entry.attachments = newIds;
+        await saveEntry(entry);
+      }
+    }
+
+    // ==========================================
+    // Object URL lifecycle
+    // ==========================================
+
+    // Ensure all needed attachment IDs have cached object URLs
+    async function preloadAttachmentUrls(ids) {
+      for (const id of ids) {
+        if (!objectUrlCache.has(id)) {
+          const rec = await getAttachmentRecord(id);
+          if (rec) {
+            objectUrlCache.set(id, { url: URL.createObjectURL(rec.blob), type: rec.type });
+          }
+        }
+      }
+    }
+
+    // Revoke and remove object URLs for IDs no longer needed
+    function revokeStaleObjectUrls(neededIds) {
+      const needed = new Set(neededIds);
+      for (const [id, { url }] of objectUrlCache) {
+        if (!needed.has(id)) {
+          URL.revokeObjectURL(url);
+          objectUrlCache.delete(id);
+        }
+      }
+    }
+
+    // ==========================================
+    // In-memory state
+    // ==========================================
+
     let entries = [];
+
+    function getEntryById(id) {
+      return entries.find(e => e.id === id);
+    }
+
+    function getEntriesForTab(tabName) {
+      return entries.filter(e => e.type === tabName);
+    }
+
+    // ==========================================
+    // DOM refs
+    // ==========================================
 
     const entryForm = document.getElementById('entryForm');
     const entryInput = document.getElementById('entryInput');
@@ -1115,12 +1381,16 @@
     const greeting = document.getElementById('greeting');
     const tabs = document.querySelectorAll('.tab');
 
+    // ==========================================
+    // Greeting
+    // ==========================================
+
     function updateGreeting() {
       const hour = new Date().getHours();
       const greetings = {
-        morning: ['Good morning', 'Rise and shine', 'A fresh start'],
-        afternoon: ['Good afternoon', 'Keep going', 'You\'ve got this'],
-        evening: ['Good evening', 'Wind down', 'Almost there']
+        morning: ['Rise and slay', 'Morning, wildman', 'Time to conquer'],
+        afternoon: ['Keep slaying', 'Halfway conquered', 'No stopping now'],
+        evening: ['Final push', 'Almost slayed it', 'Finish strong']
       };
 
       let timeOfDay = 'morning';
@@ -1131,31 +1401,40 @@
       greeting.textContent = options[Math.floor(Math.random() * options.length)];
     }
 
+    // Refresh greeting when returning to the tab
+    document.addEventListener('visibilitychange', () => {
+      if (!document.hidden) updateGreeting();
+    });
+
+    // ==========================================
+    // Tab switching
+    // ==========================================
+
     function switchTab(tabName) {
       currentTab = tabName;
+      editingId = null;
+      pendingDeleteId = null;
 
-      // Update tab UI
       tabs.forEach(tab => {
         tab.classList.toggle('active', tab.dataset.tab === tabName);
       });
 
-      // Update paper class for styling
       paper.className = `paper tab-${tabName}`;
-      if (tabName === 'interruptions') {
-        paper.classList.add('interruptions');
-      } else if (tabName === 'learned') {
-        paper.classList.add('learned');
-      }
+      if (tabName === 'interruptions') paper.classList.add('interruptions');
+      else if (tabName === 'learned') paper.classList.add('learned');
 
-      // Update placeholder
       entryInput.placeholder = placeholders[tabName];
 
       renderEntries();
     }
 
-    function getEntriesForTab(tabName) {
-      return entries.filter(e => e.type === tabName);
-    }
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    });
+
+    // ==========================================
+    // Rendering
+    // ==========================================
 
     function updateTabCounts() {
       document.getElementById('tasksCount').textContent = entries.filter(e => e.type === 'tasks').length;
@@ -1163,31 +1442,35 @@
       document.getElementById('learnedCount').textContent = entries.filter(e => e.type === 'learned').length;
     }
 
-    function renderAttachments(attachments, entryIndex) {
-      if (!attachments || attachments.length === 0) return '';
+    function renderAttachments(attachmentIds, entryId) {
+      if (!attachmentIds || attachmentIds.length === 0) return '';
 
       return `
         <div class="attachments">
-          ${attachments.map((att, attIndex) => {
-            if (att.type.startsWith('image/')) {
+          ${attachmentIds.map(attId => {
+            const cached = objectUrlCache.get(attId);
+            if (!cached) return '';
+            const { url, type } = cached;
+
+            if (type.startsWith('image/')) {
               return `
                 <div class="attachment">
-                  <img src="${att.data}" alt="attachment">
-                  <button class="btn-remove-attachment" onclick="removeAttachment(${entryIndex}, ${attIndex})">×</button>
+                  <img src="${url}" alt="attachment">
+                  <button class="btn-remove-attachment" data-action="remove-attachment" data-id="${entryId}" data-att-id="${attId}">&times;</button>
                 </div>
               `;
-            } else if (att.type.startsWith('video/')) {
+            } else if (type.startsWith('video/')) {
               return `
                 <div class="attachment">
-                  <video src="${att.data}" controls></video>
-                  <button class="btn-remove-attachment" onclick="removeAttachment(${entryIndex}, ${attIndex})">×</button>
+                  <video src="${url}" controls></video>
+                  <button class="btn-remove-attachment" data-action="remove-attachment" data-id="${entryId}" data-att-id="${attId}">&times;</button>
                 </div>
               `;
-            } else if (att.type.startsWith('audio/')) {
+            } else if (type.startsWith('audio/')) {
               return `
                 <div class="attachment audio-attachment">
-                  <audio src="${att.data}" controls></audio>
-                  <button class="btn-remove-attachment" onclick="removeAttachment(${entryIndex}, ${attIndex})">×</button>
+                  <audio src="${url}" controls></audio>
+                  <button class="btn-remove-attachment" data-action="remove-attachment" data-id="${entryId}" data-att-id="${attId}">&times;</button>
                 </div>
               `;
             }
@@ -1197,8 +1480,16 @@
       `;
     }
 
-    function renderEntries() {
+    async function renderEntries() {
       const tabEntries = getEntriesForTab(currentTab);
+
+      // Collect attachment IDs needed for this render
+      const neededIds = tabEntries.flatMap(e =>
+        Array.isArray(e.attachments) ? e.attachments.filter(a => typeof a === 'number') : []
+      );
+
+      await preloadAttachmentUrls(neededIds);
+      revokeStaleObjectUrls(neededIds);
 
       if (tabEntries.length === 0) {
         const empty = emptyStates[currentTab];
@@ -1210,9 +1501,7 @@
           </div>
         `;
       } else {
-        entryList.innerHTML = tabEntries.map((entry) => {
-          const globalIndex = entries.indexOf(entry);
-          const isRecording = recordingEntryIndex === globalIndex;
+        entryList.innerHTML = tabEntries.map(entry => {
           const markerClass = currentTab === 'tasks' ? 'task' :
                               currentTab === 'interruptions' ? 'interruption' : 'learned';
 
@@ -1223,49 +1512,64 @@
             markerContent = `<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="M12 2a7 7 0 0 1 7 7c0 2.38-1.19 4.47-3 5.74V17H8v-2.26C6.19 13.47 5 11.38 5 9a7 7 0 0 1 7-7z"/></svg>`;
           }
 
-          const markerClick = currentTab === 'tasks' ? `onclick="toggleEntry(${globalIndex})"` : '';
+          const markerAttrs = currentTab === 'tasks'
+            ? `data-action="toggle" data-id="${entry.id}"`
+            : '';
+
+          const attachmentIds = Array.isArray(entry.attachments)
+            ? entry.attachments.filter(a => typeof a === 'number')
+            : [];
+
+          const actionsHtml = pendingDeleteId === entry.id
+            ? `<div class="delete-confirm">
+                <span>Remove?</span>
+                <button class="btn-action confirm" data-action="confirm-delete" data-id="${entry.id}">Yes</button>
+                <button class="btn-action" data-action="cancel-delete" data-id="${entry.id}">No</button>
+              </div>`
+            : `<div class="entry-actions">
+                <button class="btn-action" data-action="edit" data-id="${entry.id}">Edit</button>
+                <button class="btn-action delete" data-action="delete" data-id="${entry.id}">Delete</button>
+              </div>`;
 
           return `
-          <div class="entry ${currentTab} ${entry.completed ? 'completed' : ''}" data-index="${globalIndex}">
-            <div class="entry-marker ${markerClass}" ${markerClick}>${markerContent}</div>
-            <div class="entry-content">
-              ${entry.editing ?
-                `<input type="text" class="edit-input" value="${escapeHtml(entry.text)}" onblur="saveEdit(${globalIndex}, this.value)" onkeypress="if(event.key === 'Enter') saveEdit(${globalIndex}, this.value)" onkeydown="if(event.key === 'Escape') { event.target.blur(); }" autofocus>` :
-                `<div class="entry-text" ondblclick="editEntry(${globalIndex})">${escapeHtml(entry.text)}</div>`
-              }
-              ${renderAttachments(entry.attachments, globalIndex)}
-              <div class="media-buttons">
-                <button class="btn-media ${isRecording ? 'recording' : ''}" onclick="toggleAudioRecording(${globalIndex})" title="Record audio">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
-                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
-                  </svg>
-                </button>
-                <button class="btn-media" onclick="capturePhoto(${globalIndex})" title="Take photo">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <circle cx="12" cy="13" r="4"/>
-                    <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
-                  </svg>
-                </button>
-                <button class="btn-media" onclick="captureVideo(${globalIndex})" title="Record video">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <polygon points="23 7 16 12 23 17 23 7"/>
-                    <rect x="1" y="5" width="15" height="14" rx="2"/>
-                  </svg>
-                </button>
-                <button class="btn-media" onclick="pickFile(${globalIndex})" title="Attach file">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
-                  </svg>
-                </button>
+            <div class="entry ${currentTab} ${entry.completed ? 'completed' : ''}" data-id="${entry.id}">
+              <div class="entry-marker ${markerClass}" ${markerAttrs}>${markerContent}</div>
+              <div class="entry-content">
+                ${editingId === entry.id
+                  ? `<input type="text" class="edit-input" value="${escapeHtml(entry.text)}" data-id="${entry.id}" autofocus>`
+                  : `<div class="entry-text">${escapeHtml(entry.text)}</div>`
+                }
+                ${renderAttachments(attachmentIds, entry.id)}
+                <div class="media-buttons">
+                  <button class="btn-media ${recordingEntryId === entry.id ? 'recording' : ''}" data-action="record-audio" data-id="${entry.id}" title="Record audio">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                      <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    </svg>
+                  </button>
+                  <button class="btn-media" data-action="capture-photo" data-id="${entry.id}" title="Take photo">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <circle cx="12" cy="13" r="4"/>
+                      <path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/>
+                    </svg>
+                  </button>
+                  <button class="btn-media" data-action="capture-video" data-id="${entry.id}" title="Record video">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <polygon points="23 7 16 12 23 17 23 7"/>
+                      <rect x="1" y="5" width="15" height="14" rx="2"/>
+                    </svg>
+                  </button>
+                  <button class="btn-media" data-action="pick-file" data-id="${entry.id}" title="Attach file">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                      <path d="M21.44 11.05l-9.19 9.19a6 6 0 0 1-8.49-8.49l9.19-9.19a4 4 0 0 1 5.66 5.66l-9.2 9.19a2 2 0 0 1-2.83-2.83l8.49-8.48"/>
+                    </svg>
+                  </button>
+                </div>
               </div>
+              ${actionsHtml}
             </div>
-            <div class="entry-actions">
-              <button class="btn-action" onclick="editEntry(${globalIndex})">Edit</button>
-              <button class="btn-action delete" onclick="deleteEntry(${globalIndex})">Delete</button>
-            </div>
-          </div>
-        `}).join('');
+          `;
+        }).join('');
       }
 
       updateStats();
@@ -1287,24 +1591,20 @@
       const total = tasks.length + interruptions + learned;
 
       if (total === 0) {
-        statsLeft.textContent = 'A blank page awaits';
+        statsLeft.textContent = 'Ready to slay';
         statsRight.textContent = '';
       } else {
-        // Build a summary
         const parts = [];
-
         if (tasks.length > 0) {
           const remaining = tasks.length - completed;
-          if (remaining === 0 && tasks.length > 0) {
+          if (remaining === 0) {
             parts.push(`<span class="tasks-stat highlight">All done!</span>`);
-          } else if (remaining > 0) {
+          } else {
             parts.push(`${remaining} ${remaining === 1 ? 'task' : 'tasks'} left`);
           }
         }
-
         statsLeft.innerHTML = parts.length > 0 ? parts.join(' ') : 'Your day so far';
 
-        // Right side: show counts for each type
         const rightParts = [];
         if (completed > 0) rightParts.push(`<span class="tasks-stat">${completed} done</span>`);
         if (interruptions > 0) rightParts.push(`<span class="interrupt-stat">${interruptions} interruption${interruptions !== 1 ? 's' : ''}</span>`);
@@ -1314,88 +1614,173 @@
       }
     }
 
-    // Tab click handlers
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => switchTab(tab.dataset.tab));
+    // ==========================================
+    // Delegated event handling — entryList
+    // ==========================================
+
+    entryList.addEventListener('click', async (e) => {
+      const btn = e.target.closest('[data-action]');
+      if (!btn) return;
+
+      const action = btn.dataset.action;
+      const id = parseInt(btn.dataset.id, 10);
+
+      switch (action) {
+        case 'toggle':
+          await toggleEntry(id);
+          break;
+        case 'edit':
+          editEntry(id);
+          break;
+        case 'delete':
+          pendingDeleteId = id;
+          await renderEntries();
+          break;
+        case 'confirm-delete':
+          await deleteEntry(id);
+          break;
+        case 'cancel-delete':
+          pendingDeleteId = null;
+          await renderEntries();
+          break;
+        case 'remove-attachment':
+          await removeAttachment(id, parseInt(btn.dataset.attId, 10));
+          break;
+        case 'record-audio':
+          await toggleAudioRecording(id);
+          break;
+        case 'capture-photo':
+          await capturePhoto(id);
+          break;
+        case 'capture-video':
+          await captureVideo(id);
+          break;
+        case 'pick-file':
+          pickFile(id);
+          break;
+      }
     });
 
-    entryForm.addEventListener('submit', async (e) => {
-      e.preventDefault();
-
-      const text = entryInput.value.trim();
+    // Double-click on entry text to edit
+    entryList.addEventListener('dblclick', (e) => {
+      const text = e.target.closest('.entry-text');
       if (!text) return;
-
-      entries.push({
-        text,
-        type: currentTab,
-        completed: false,
-        editing: false,
-        createdAt: Date.now()
-      });
-
-      entryInput.value = '';
-      await saveEntries(entries);
-      renderEntries();
+      const entryEl = e.target.closest('.entry');
+      if (!entryEl) return;
+      editEntry(parseInt(entryEl.dataset.id, 10));
     });
 
-    window.toggleEntry = async (index) => {
-      if (entries[index].type === 'tasks') {
-        entries[index].completed = !entries[index].completed;
-        await saveEntries(entries);
+    // Edit input: Enter key commits (via blur), Escape discards
+    entryList.addEventListener('keydown', (e) => {
+      if (!e.target.classList.contains('edit-input')) return;
+      if (e.key === 'Enter') {
+        e.target.blur(); // triggers the blur handler below
+      } else if (e.key === 'Escape') {
+        editingId = null;
         renderEntries();
       }
-    };
+    });
 
-    window.editEntry = (index) => {
-      entries.forEach((e, i) => e.editing = i === index);
-      renderEntries();
-      setTimeout(() => {
-        const input = document.querySelector('.edit-input');
-        if (input) {
-          input.focus();
-          input.setSelectionRange(input.value.length, input.value.length);
-        }
-      }, 10);
-    };
+    // Edit input: blur commits the edit (unless Escape already cleared editingId)
+    entryList.addEventListener('blur', (e) => {
+      if (!e.target.classList.contains('edit-input')) return;
+      if (editingId === null) return; // Escape was pressed
+      const entryEl = e.target.closest('.entry');
+      if (!entryEl) return;
+      saveEdit(parseInt(entryEl.dataset.id, 10), e.target.value);
+    }, true /* capture — blur doesn't bubble */);
 
-    window.saveEdit = async (index, newText) => {
-      const trimmed = newText.trim();
-      if (trimmed) {
-        entries[index].text = trimmed;
-      }
-      entries[index].editing = false;
-      await saveEntries(entries);
-      renderEntries();
-    };
+    // ==========================================
+    // Entry actions
+    // ==========================================
 
-    window.deleteEntry = async (index) => {
-      if (confirm('Remove this entry?')) {
-        entries.splice(index, 1);
-        await saveEntries(entries);
-        renderEntries();
-      }
-    };
-
-    // Add attachment
-    async function addAttachment(entryIndex, data, type) {
-      if (!entries[entryIndex].attachments) {
-        entries[entryIndex].attachments = [];
-      }
-      entries[entryIndex].attachments.push({ data, type, createdAt: Date.now() });
-      await saveEntries(entries);
-      renderEntries();
+    async function toggleEntry(id) {
+      const entry = getEntryById(id);
+      if (!entry || entry.type !== 'tasks') return;
+      entry.completed = !entry.completed;
+      await saveEntry(entry);
+      await renderEntries();
     }
 
-    window.removeAttachment = async (entryIndex, attachmentIndex) => {
-      if (entries[entryIndex].attachments) {
-        entries[entryIndex].attachments.splice(attachmentIndex, 1);
-        await saveEntries(entries);
-        renderEntries();
-      }
-    };
+    function editEntry(id) {
+      editingId = id;
+      renderEntries().then(() => {
+        requestAnimationFrame(() => {
+          const input = entryList.querySelector('.edit-input');
+          if (input) {
+            input.focus();
+            input.setSelectionRange(input.value.length, input.value.length);
+          }
+        });
+      });
+    }
 
+    async function saveEdit(id, newText) {
+      if (editingId !== id) return; // guard against double-fire from Enter+blur
+      const entry = getEntryById(id);
+      if (!entry) return;
+      const trimmed = newText.trim();
+      if (trimmed) entry.text = trimmed;
+      editingId = null;
+      await saveEntry(entry);
+      await renderEntries();
+    }
+
+    async function deleteEntry(id) {
+      const index = entries.findIndex(e => e.id === id);
+      if (index === -1) return;
+
+      // Clean up any attachments
+      const attachmentIds = Array.isArray(entries[index].attachments)
+        ? entries[index].attachments.filter(a => typeof a === 'number')
+        : [];
+      for (const attId of attachmentIds) {
+        if (objectUrlCache.has(attId)) {
+          URL.revokeObjectURL(objectUrlCache.get(attId).url);
+          objectUrlCache.delete(attId);
+        }
+        await deleteAttachmentRecord(attId);
+      }
+
+      await saveEntry({ id }, 'delete');
+      entries.splice(index, 1);
+      pendingDeleteId = null;
+      await renderEntries();
+    }
+
+    // ==========================================
+    // Attachments
+    // ==========================================
+
+    async function addAttachment(entryId, blob, type) {
+      const attId = await saveAttachmentBlob(blob, type);
+      const entry = getEntryById(entryId);
+      if (!entry) return;
+      if (!Array.isArray(entry.attachments)) entry.attachments = [];
+      entry.attachments.push(attId);
+      await saveEntry(entry);
+      await renderEntries();
+    }
+
+    async function removeAttachment(entryId, attId) {
+      const entry = getEntryById(entryId);
+      if (!entry || !Array.isArray(entry.attachments)) return;
+      entry.attachments = entry.attachments.filter(id => id !== attId);
+
+      if (objectUrlCache.has(attId)) {
+        URL.revokeObjectURL(objectUrlCache.get(attId).url);
+        objectUrlCache.delete(attId);
+      }
+      await deleteAttachmentRecord(attId);
+      await saveEntry(entry);
+      await renderEntries();
+    }
+
+    // ==========================================
     // Audio recording
-    window.toggleAudioRecording = async (index) => {
+    // ==========================================
+
+    async function toggleAudioRecording(entryId) {
       if (mediaRecorder && mediaRecorder.state === 'recording') {
         mediaRecorder.stop();
         return;
@@ -1403,9 +1788,11 @@
 
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
-        mediaRecorder = new MediaRecorder(stream);
+        currentAudioMime = getSupportedMimeType(AUDIO_MIME_CANDIDATES);
+        const options = currentAudioMime ? { mimeType: currentAudioMime } : {};
+        mediaRecorder = new MediaRecorder(stream, options);
         audioChunks = [];
-        recordingEntryIndex = index;
+        recordingEntryId = entryId;
 
         mediaRecorder.ondataavailable = (e) => {
           audioChunks.push(e.data);
@@ -1413,38 +1800,37 @@
 
         mediaRecorder.onstop = async () => {
           stream.getTracks().forEach(track => track.stop());
-          const blob = new Blob(audioChunks, { type: 'audio/webm' });
-          const reader = new FileReader();
-          reader.onloadend = async () => {
-            await addAttachment(recordingEntryIndex, reader.result, 'audio/webm');
-            recordingEntryIndex = null;
-            mediaRecorder = null;
-          };
-          reader.readAsDataURL(blob);
+          const blob = new Blob(audioChunks, { type: currentAudioMime || 'audio/webm' });
+          await addAttachment(recordingEntryId, blob, blob.type);
+          recordingEntryId = null;
+          mediaRecorder = null;
         };
 
         mediaRecorder.start();
-        renderEntries();
+        await renderEntries();
       } catch (err) {
         alert('Could not access microphone. Please allow microphone access.');
-        recordingEntryIndex = null;
+        recordingEntryId = null;
       }
-    };
+    }
 
+    // ==========================================
     // Photo capture
-    window.capturePhoto = async (index) => {
+    // ==========================================
+
+    async function capturePhoto(entryId) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' } });
 
         const modal = document.createElement('div');
-        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(61,58,52,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
+        modal.className = 'capture-modal';
         modal.innerHTML = `
-          <div style="position:relative;width:100%;max-width:400px;">
-            <video autoplay playsinline style="width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);"></video>
+          <div class="capture-modal-preview">
+            <video autoplay playsinline></video>
           </div>
-          <div style="margin-top:1.5rem;display:flex;gap:1rem;">
-            <button id="captureBtn" style="padding:0.875rem 2rem;background:#c1765a;border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Capture</button>
-            <button id="cancelBtn" style="padding:0.875rem 2rem;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Cancel</button>
+          <div class="capture-modal-actions">
+            <button class="btn-capture-primary">Capture</button>
+            <button class="btn-capture-cancel">Cancel</button>
           </div>
         `;
         document.body.appendChild(modal);
@@ -1452,42 +1838,47 @@
         const modalVideo = modal.querySelector('video');
         modalVideo.srcObject = stream;
 
-        modal.querySelector('#cancelBtn').onclick = () => {
+        modal.querySelector('.btn-capture-cancel').addEventListener('click', () => {
           stream.getTracks().forEach(track => track.stop());
           modal.remove();
-        };
+        });
 
-        modal.querySelector('#captureBtn').onclick = () => {
+        modal.querySelector('.btn-capture-primary').addEventListener('click', () => {
           const canvas = document.createElement('canvas');
           canvas.width = modalVideo.videoWidth;
           canvas.height = modalVideo.videoHeight;
           canvas.getContext('2d').drawImage(modalVideo, 0, 0);
-          const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
-          stream.getTracks().forEach(track => track.stop());
-          modal.remove();
-          addAttachment(index, dataUrl, 'image/jpeg');
-        };
+          canvas.toBlob(async (blob) => {
+            stream.getTracks().forEach(track => track.stop());
+            modal.remove();
+            await addAttachment(entryId, blob, 'image/jpeg');
+          }, 'image/jpeg', 0.8);
+        });
       } catch (err) {
         alert('Could not access camera. Please allow camera access.');
       }
-    };
+    }
 
+    // ==========================================
     // Video capture
-    window.captureVideo = async (index) => {
+    // ==========================================
+
+    async function captureVideo(entryId) {
       try {
         const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'environment' }, audio: true });
+        const videoMime = getSupportedMimeType(VIDEO_MIME_CANDIDATES);
         let videoRecorder;
         let videoChunks = [];
 
         const modal = document.createElement('div');
-        modal.style.cssText = 'position:fixed;top:0;left:0;right:0;bottom:0;background:rgba(61,58,52,0.95);z-index:1000;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:1rem;';
+        modal.className = 'capture-modal';
         modal.innerHTML = `
-          <div style="position:relative;width:100%;max-width:400px;">
-            <video autoplay playsinline muted style="width:100%;border-radius:8px;box-shadow:0 4px 20px rgba(0,0,0,0.3);"></video>
+          <div class="capture-modal-preview">
+            <video autoplay playsinline muted></video>
           </div>
-          <div style="margin-top:1.5rem;display:flex;gap:1rem;">
-            <button id="recordBtn" style="padding:0.875rem 2rem;background:#c96b6b;border:none;border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Start Recording</button>
-            <button id="cancelBtn" style="padding:0.875rem 2rem;background:transparent;border:1px solid rgba(255,255,255,0.3);border-radius:8px;color:white;font-size:1rem;cursor:pointer;font-family:inherit;">Cancel</button>
+          <div class="capture-modal-actions">
+            <button class="btn-capture-record">Start Recording</button>
+            <button class="btn-capture-cancel">Cancel</button>
           </div>
         `;
         document.body.appendChild(modal);
@@ -1495,72 +1886,95 @@
         const modalVideo = modal.querySelector('video');
         modalVideo.srcObject = stream;
 
-        const recordBtn = modal.querySelector('#recordBtn');
+        const recordBtn = modal.querySelector('.btn-capture-record');
         let isRecording = false;
 
-        modal.querySelector('#cancelBtn').onclick = () => {
+        modal.querySelector('.btn-capture-cancel').addEventListener('click', () => {
           if (videoRecorder && videoRecorder.state === 'recording') {
             videoRecorder.stop();
           }
           stream.getTracks().forEach(track => track.stop());
           modal.remove();
-        };
+        });
 
-        recordBtn.onclick = () => {
+        recordBtn.addEventListener('click', () => {
           if (!isRecording) {
             videoChunks = [];
-            videoRecorder = new MediaRecorder(stream);
+            const options = videoMime ? { mimeType: videoMime } : {};
+            videoRecorder = new MediaRecorder(stream, options);
             videoRecorder.ondataavailable = (e) => videoChunks.push(e.data);
             videoRecorder.onstop = async () => {
-              const blob = new Blob(videoChunks, { type: 'video/webm' });
-              const reader = new FileReader();
-              reader.onloadend = () => {
-                stream.getTracks().forEach(track => track.stop());
-                modal.remove();
-                addAttachment(index, reader.result, 'video/webm');
-              };
-              reader.readAsDataURL(blob);
+              const blob = new Blob(videoChunks, { type: videoMime || 'video/webm' });
+              stream.getTracks().forEach(track => track.stop());
+              modal.remove();
+              await addAttachment(entryId, blob, blob.type);
             };
             videoRecorder.start();
             recordBtn.textContent = 'Stop Recording';
-            recordBtn.style.background = '#7a9e7e';
+            recordBtn.classList.add('recording');
             isRecording = true;
           } else {
             videoRecorder.stop();
           }
-        };
+        });
       } catch (err) {
         alert('Could not access camera/microphone. Please allow access.');
       }
-    };
+    }
 
+    // ==========================================
     // File picker
-    window.pickFile = (index) => {
+    // ==========================================
+
+    function pickFile(entryId) {
       const input = document.createElement('input');
       input.type = 'file';
       input.accept = 'image/*,video/*,audio/*';
-      input.onchange = (e) => {
+      input.addEventListener('change', async (e) => {
         const file = e.target.files[0];
-        if (file) {
-          const reader = new FileReader();
-          reader.onloadend = () => {
-            addAttachment(index, reader.result, file.type);
-          };
-          reader.readAsDataURL(file);
-        }
-      };
+        if (file) await addAttachment(entryId, file, file.type);
+      });
       input.click();
-    };
+    }
+
+    // ==========================================
+    // Form submit — add new entry
+    // ==========================================
+
+    entryForm.addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const text = entryInput.value.trim();
+      if (!text) return;
+
+      const entryData = { text, type: currentTab, completed: false, createdAt: Date.now() };
+      const id = await saveEntry(entryData);
+      entryData.id = id;
+      entries.push(entryData);
+
+      entryInput.value = '';
+      await renderEntries();
+    });
+
+    // ==========================================
+    // Init
+    // ==========================================
 
     async function init() {
       try {
         db = await openDB();
         entries = await loadEntries();
-        renderEntries();
+        await migrateAttachments();
+        await renderEntries();
         updateGreeting();
       } catch (error) {
         console.error('Init failed:', error);
-        renderEntries();
+        document.getElementById('paper').innerHTML = `
+          <div class="error-state">
+            <p>Could not load your data. Please refresh the page.</p>
+            <button id="retryBtn">Refresh</button>
+          </div>
+        `;
+        document.getElementById('retryBtn').addEventListener('click', () => window.location.reload());
       }
     }
 
@@ -1573,19 +1987,16 @@
     let deferredPrompt = null;
     let swRegistration = null;
 
-    // Register service worker
     if ('serviceWorker' in navigator) {
       window.addEventListener('load', async () => {
         try {
           swRegistration = await navigator.serviceWorker.register('./sw.js');
           console.log('Service Worker registered:', swRegistration.scope);
 
-          // Check for updates
           swRegistration.addEventListener('updatefound', () => {
             const newWorker = swRegistration.installing;
             newWorker.addEventListener('statechange', () => {
               if (newWorker.state === 'installed' && navigator.serviceWorker.controller) {
-                // New content available, show update banner
                 document.getElementById('updateBanner').classList.add('show');
               }
             });
@@ -1595,13 +2006,11 @@
         }
       });
 
-      // Handle controller change (when new SW takes over)
       navigator.serviceWorker.addEventListener('controllerchange', () => {
         window.location.reload();
       });
     }
 
-    // Update button click handler
     document.getElementById('updateBtn').addEventListener('click', () => {
       if (swRegistration && swRegistration.waiting) {
         swRegistration.waiting.postMessage({ type: 'SKIP_WAITING' });
@@ -1609,58 +2018,42 @@
       document.getElementById('updateBanner').classList.remove('show');
     });
 
-    // Install prompt handling
     window.addEventListener('beforeinstallprompt', (e) => {
-      // Prevent the mini-infobar from appearing
       e.preventDefault();
-      // Store the event for later use
       deferredPrompt = e;
 
-      // Check if user has dismissed the banner before
       const dismissed = localStorage.getItem('installBannerDismissed');
       const dismissedTime = dismissed ? parseInt(dismissed, 10) : 0;
       const daysSinceDismissed = (Date.now() - dismissedTime) / (1000 * 60 * 60 * 24);
 
-      // Show install banner if not dismissed recently (within 7 days)
       if (!dismissed || daysSinceDismissed > 7) {
         setTimeout(() => {
           document.getElementById('installBanner').classList.add('show');
-        }, 2000); // Show after 2 seconds
+        }, 2000);
       }
     });
 
-    // Install button click handler
     document.getElementById('installBtn').addEventListener('click', async () => {
       if (!deferredPrompt) return;
-
-      // Show the install prompt
       deferredPrompt.prompt();
-
-      // Wait for user response
       const { outcome } = await deferredPrompt.userChoice;
       console.log('Install prompt outcome:', outcome);
-
-      // Clear the deferred prompt
       deferredPrompt = null;
-
-      // Hide the banner
       document.getElementById('installBanner').classList.remove('show');
     });
 
-    // Dismiss button click handler
     document.getElementById('dismissBtn').addEventListener('click', () => {
       document.getElementById('installBanner').classList.remove('show');
       localStorage.setItem('installBannerDismissed', Date.now().toString());
     });
 
-    // Handle app installed event
     window.addEventListener('appinstalled', () => {
       console.log('App installed successfully');
       document.getElementById('installBanner').classList.remove('show');
       deferredPrompt = null;
     });
 
-    // Offline/Online status handling
+    // Offline / online status
     const offlineIndicator = document.getElementById('offlineIndicator');
 
     function updateOnlineStatus() {
