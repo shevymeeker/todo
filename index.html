@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <meta name="theme-color" content="#1a2340">
+  <meta name="theme-color" content="#2b1f14">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
   <meta name="apple-mobile-web-app-title" content="Dayslayer">
@@ -24,22 +24,22 @@
     }
 
     :root {
-      --paper: #f0f2f8;
-      --bg: #1a2340;
-      --text: #1c2235;
-      --text-soft: #5a6380;
-      --text-faded: #8e95aa;
-      --line: #d4d8e5;
-      --accent: #2d3a5e;
-      --accent-soft: #4a5a82;
-      --success: #3d8b5e;
-      --success-soft: #6aad85;
-      --danger: #c94444;
-      --interrupt: #7b5ea7;
-      --interrupt-soft: #a48bcf;
-      --learned: #c4880d;
-      --learned-soft: #daa73e;
-      --shadow: rgba(26, 35, 64, 0.12);
+      --paper: #fdf6e8;
+      --bg: #2b1f14;
+      --text: #2c1a0e;
+      --text-soft: #7a5c3e;
+      --text-faded: #b09070;
+      --line: #e8d8c0;
+      --accent: #3d5e35;
+      --accent-soft: #5e8a52;
+      --success: #4a7c5e;
+      --success-soft: #70a882;
+      --danger: #b84040;
+      --interrupt: #9b4a3a;
+      --interrupt-soft: #c47060;
+      --learned: #a07830;
+      --learned-soft: #c49b50;
+      --shadow: rgba(43, 31, 20, 0.15);
     }
 
     html {
@@ -74,14 +74,14 @@
       font-family: 'Caveat', cursive;
       font-size: 2.5rem;
       font-weight: 500;
-      color: var(--accent);
+      color: var(--paper);
       letter-spacing: 0.02em;
       margin-bottom: 0.25rem;
     }
 
     .header p {
       font-size: 0.9rem;
-      color: var(--text-soft);
+      color: rgba(253, 246, 232, 0.55);
       font-style: italic;
     }
 
@@ -196,17 +196,17 @@
       bottom: 0;
       left: 2.5rem;
       width: 1px;
-      background: #c4c8d8;
+      background: #c0d0b0;
       pointer-events: none;
       transition: background 0.3s;
     }
 
     .paper.interruptions::after {
-      background: #c8c0e0;
+      background: #d4b0a0;
     }
 
     .paper.learned::after {
-      background: #ddd0a8;
+      background: #d4c490;
     }
 
     /* Add entry area */
@@ -316,7 +316,7 @@
     }
 
     .entry:hover {
-      background: rgba(245, 241, 235, 0.5);
+      background: rgba(180, 150, 100, 0.12);
     }
 
     .entry.completed {
@@ -970,7 +970,7 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background: rgba(26, 35, 64, 0.95);
+      background: rgba(43, 31, 20, 0.97);
       z-index: 1000;
       display: flex;
       flex-direction: column;
